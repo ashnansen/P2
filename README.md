@@ -1,2 +1,4 @@
 # P2
-TEst
+This project is for a course at AAU CPH denmark. 
+
+
