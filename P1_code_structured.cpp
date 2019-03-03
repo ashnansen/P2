@@ -1,0 +1,216 @@
+//Final code
+#include(iostream);
+
+
+//Libraries
+#include “IRremote.h”      //	Libraries are used to access large amounts of code without having to write it in the actual document. 
+
+
+// Pin's
+
+const int rightValue = A1; //
+const int leftValue = A0;  //
+const int trigPin = 12;    // 
+const int echoPin = 11;    // 
+
+
+//Constants
+
+const int rSpeed = 5;
+const int rBackward = 7;
+const int rForward = 8;
+const int lSpeed = 6; 
+const int lBackward = 9; 
+const int lForward = 10;
+const int stby = 1;  
+
+/*	A constant int is a ‘container’ in which we allocate a value or set a pin number. During the programme,
+ the value of the constants can not be changed. On this part of the code, the pins are set. */
+
+int leftRead;
+int rightRead;
+int leftSpeed;
+int rightSpeed;
+int error = 0;
+int P;
+int I;
+int D;
+int prevError;
+int motorSpeed = 130;
+int lSpeedPWM;
+int rSpeedPWM;
+float PIDValue;
+float Kp = 60.0;
+float Ki = 1;
+float Kd = 10;
+float duration;
+float dist;
+float total;
+float readings[numreadings];
+
+/*Int Integers or float values keep numbers. The difference between int and float is that an int variable must be a integer number,
+and a float variable can keep a number with decimals. 
+Also, it is possible to keep bigger numbers in a float variable. 
+The difference between the first robot code and this one is that here there are new variables declared for the PID control. */
+
+IRRecv irrecv(receiver);
+decode_results results;
+
+void translateIR(){
+  switch (results.value) {
+  case 0xFFA25D: 
+    Serial.println(“POWER”);
+    digitalWrite(stby, HIGH);
+  default:
+    Serial.prinln(“Error, unset button”);	
+    /* The infrared remote uses the library IRRemote.h to decode the signals received from the remote. 
+    A switch is used to register the signal and activate the standby pin to activate the H-bridge. 
+    Using a switch allows us to easily add more functions for the rest of the buttons on the remote. */
+
+void forward() {
+  digitalWrite(lBackward, LOW);
+  digitalWrite(lForward, HIGH);
+  analogWrite(rSpeed, rightSpeed);
+  digitalWrite(rBackward, LOW);
+  digitalWrite(rForward, HIGH);
+  analogWrite(lSpeed, leftSpeed);
+}	
+/* Through this void function called forward() we are activating the power used by the motors for both sides, left and right.
+This allows the wheels to move forward. */
+
+void distance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  dist = duration * 0.034 / 2;
+}
+
+// For determining the distance between the robot and an obstacle, we used the function distance(). 
+
+total = total - readings[readIndex];
+readings[readIndex] = dist;
+total = total - readings[readIndex];
+readIndex = readIndex + 1;
+if (readIndex >= numReadings) {
+  readIndex = 0;
+}
+distSmooth = total / numReadings;
+delay(1); 
+
+/*	To dampen the spikes from the distance sensor, we added a moving average smoothing to the distance readings. 
+This takes an average of the distance readings and compares that to when the car has to stop. */ 
+
+void shutDown() {
+  digitalWrite(stby, LOW);
+  analogWrite(rSpeed, 0);
+  digitalWrite(rForward, LOW);
+  digitalWrite(rBackward, LOW);
+  analogWrite(lSpeed, 0);
+  digitalWrite(lForward, LOW);
+  digitalWrite(lBackward, LOW);
+}	shutDown() 
+
+/* function is used for the moment the robot meets an obstacle and needs to stop in front of it. 
+It is used as a stand-by function, because when the function it is called, the wheels stop. */
+
+void PIDController() {
+  P = error;
+  I = error + I;
+  D = error - prevError;
+  PIDValue = (Kp * P) + (Ki * I) + (Kd * D);
+  prevError = error;
+} 
+
+/*	A proportional–integral–derivative controller
+is a control loop mechanism used in industrial control systems because it applies 
+accurate and responsive correction to a control function that we use. 
+For our code, this function helped us to improve the calibration of the robot. 
+Thus, the robot was able to follow a straight line without shaking. 
+The PID applies a correction based on proportional, integral and derivative controller. */
+
+
+void lineSensorTest() {
+  if (leftRead < 900 && rightRead < 900)
+  {
+    error = 0;
+  }
+  else if (leftRead > 900)
+  {
+    error = -1;
+  }
+  else if (rightRead > 900)
+  {
+    error = 1;	/* lineSensorTest() function is a void function who changes the value of the error variable. 
+    Also, the functions checks if the robot’s sensors read the right values. 
+    According to the values read, the error takes a different value. */
+
+void motorSpeedControl() {
+  lSpeedPWM = motorSpeed - PIDValue;
+  constrain(lSpeedPWM, 0, 254);
+  analogWrite(lSpeed, lSpeedPWM);
+
+  rSpeedPWM = motorSpeed + PIDValue;
+  constrain(rSpeedPWM, 0, 254);
+  analogWrite(rSpeed, rSpeedPWM);
+
+}
+
+/*	This function called motorSpeedControl() controls the speed of the motors. 
+The speed of the wheels is proportional with the PID value. 
+Because we took into consideration the PID control to calibrate the movements of the robot. */
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(rBackward, OUTPUT);
+  pinMode(rForward, OUTPUT);
+  pinMode(lBackward, OUTPUT);
+  pinMode(lForward, OUTPUT);
+  pinMode(rSpeed, OUTPUT);
+  pinMode(lSpeed, OUTPUT);
+  pinMode(stby, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  digitalWrite(lForward, HIGH);
+  digitalWrite(rForward, HIGH);
+  irrecv.enableIRIn();
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+  readings[thisReading] = 0;
+}
+  while (i < 10) {
+    distance();
+    i = i + 1
+  }
+}	/* This function runs only once, when the sketch starts. This is where we set the value of the pins, start using libraries, 
+set the data rate in bits per second for serial data transmission.Also , 
+the setup() function will run only once, after each startrup or reset of the Arduino board. '
+It is different from the first code, because now there are another 2 pins declared. */
+
+void loop() {
+  If (irrecv.decode(&results)) 
+  { 
+    translateIR();
+    irrecv.resume();
+  }
+  leftRead = analogRead(leftValue);
+  rightRead = analogRead(rightValue);
+  motorSpeedControl();
+  PIDController();
+  lineSensorTest();
+  distance();
+  //If the distance is under 5 cm, let the motors run for a small amount of time, then stop
+
+  if (dist <= 5) {
+    delay(20);
+    shutDown();
+  }
+} 
+/*	The loop() function is written after the setup() function and does precisely what its name suggests and loops consecutively,
+ allowing our program to change and respond to the requirements. The code for this function runs repeatedly, 
+ while the code for setup function runs only once, at the beginning of the compile-time.
+This functions is the ‘main’ function because in it the other functions are called. Also, 
+another difference is that in loop we do not analyze the line sensors values, we just call the lineSensorTest() function. 
+*/
+

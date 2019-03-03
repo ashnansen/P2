@@ -1,4 +1,3 @@
 # P2
-This project is for a course at AAU CPH denmark. 
-
-
+This is a project at AAU denmark and is not for public use. 
+It is about developing a robot for some kinde of invoriment. 
