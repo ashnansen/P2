@@ -3,14 +3,23 @@
 This is the test set up for the robot.
 for each pin the type needs to be in a comment. 
 
+Setting up engien brakets. 
+    
+
+
  */
+
+
+/*
+
+
 
 
 // defines motor 
 
 /*
 
-// right
+// right_motor1 
 
 const int pwma  =    3 ;
 const int ain1   =    2 ;
@@ -19,7 +28,8 @@ const int bin1  =    7 ;
 */ 
 
 /*
-// left motor2
+
+// left_motor2
 
 const int pwmb  =   11 ;  
 const int bin2  =    8 ;
@@ -27,7 +37,7 @@ const int ain2   =    4 ;
 
 */
 
-const int stby  =    6 ;  // What is this? 
+/* const int stby  =    6 ;  // What is this? 
 
 // defining controle input
 
@@ -53,7 +63,7 @@ float Kp = 60.0;
 float Ki = 1;
 float Kd = 10;
 float duration;
-float dist;
+float dist; 
 float total;
 float readings[numreadings];
 
@@ -66,41 +76,72 @@ float lSpeed = 0;
 float lBackward = 0; 
 float lForward = 0;
 float stby = 0;  
-/*
-void ird()
 
+*/
+
+/* void ird()
+/* This is for starting the robot.*/ 
 {
     start command
     dans  command 
 }
 
+*/
+
+/* void map() // The place where the size of the map is calculated and the perminent obsticals.
+{
+
+// matrix nxn // getting the matrix is ()
+
+
+}
+*/
+
+
+
+
+//void compass_rotation
+
+// https://www.arduino.cc/en/Tutorial/Robot Compass
+
+
+// void surunding_discovery
+
+/*
+
 void start()
 {
 
-compass rotation
 
-surunding discovery 
+
+surunding_discovery 
 
 
 }
 
-void map() // The place where the size of the map is calculated and the perminent obsticals.
-{}
+*/
 
-void navigation()
+/* void navigation()
 {
 
 
-
 }
 
+*/
+
+/* void position ()
+{}
+*/
+
+/*
 void obsticals()
 {
 
 
 
 }
-
+*/
+/*
 void dans() // For the fun of it. 
 {
 
@@ -108,13 +149,17 @@ void dans() // For the fun of it.
 
 }
 
+*/
+
+/*
+
 void save()
 {
 
 }
 
 */
-
+/*
 void setup()
 { Serial.begin(9600);   
 digitalread(encoderLeft,INPUT); // 
@@ -129,7 +174,10 @@ digitalwrit()
 
 
 }
+*/
 
+
+/*
 void loop
 
 {
@@ -161,3 +209,5 @@ void loop
 
 
 }
+
+*/
