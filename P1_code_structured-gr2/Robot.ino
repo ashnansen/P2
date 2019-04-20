@@ -1,6 +1,8 @@
 // Gnd 
 // VCC
 
+
+
 // Dual-Motor Drive Carrier
 
 PWMA = 1
@@ -21,11 +23,11 @@ B = 0
 A = 12
 B = 11
 
-
-// Linesensor 
-
+//compass
 
 
-// Ultrasonic Sensor 
+
+
+// Ultrasonic Sensor Radar. 
 
 // 

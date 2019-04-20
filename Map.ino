@@ -11,7 +11,7 @@ int a[10][10];//can be changedvoid loop() {
    for(int j=5; j<=9; ++j)
       a[i][j]=0;
 
-for(int i=4; i<=5; ++i)
+for(int i=4; i<=5; ++i) 
   for(int j = 3; j<=6; ++j)
     a[i][j]=0;
 
@@ -21,3 +21,5 @@ for(int i=0; i<=9; ++i)// printing the values of the matrix on the serial monito
 
   System.Console.WriteLine(a[i][j]);
     }
+
+    

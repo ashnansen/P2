@@ -13,12 +13,12 @@
  */
 
 // Parameters
-const int drive_distance = 100;   // cm
-const int motor_power = 200;      // 0-255 
-const int motor_offset = 5;       // Diff. when driving straight
-const int wheel_d = 60;           // Wheel diameter (mm)
-const float wheel_c = PI * wheel_d; // Wheel circumference (mm)
-const int counts_per_rev = 384;   // (4 pairs N-S) * (48:1 gearbox) * (2 falling/rising edges) = 384
+  const int drive_distance = 100;   // cm
+  const int motor_power = 200;      // 0-255 
+  const int motor_offset = 5;       // Diff. when driving straight
+  const int wheel_d = 60;           // Wheel diameter (mm)
+  const float wheel_c = PI * wheel_d; // Wheel circumference (mm)
+  const int counts_per_rev = 384;   // (4 pairs N-S) * (48:1 gearbox) * (2 falling/rising edges) = 384
 
 // Pins
 const int enc_l_pin = 2;          // Motor A
@@ -138,7 +138,7 @@ void driveStraight(float dist, int power) {
     }
 
     // Brief pause to let motors respond
-    delay(20);
+    delay(20); // no no no 
   }
 
   // Brake

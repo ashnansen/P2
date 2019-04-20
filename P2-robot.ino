@@ -1,45 +1,50 @@
-/*
-
-This is the test set up for the robot.
-for each pin the type needs to be in a comment. 
-
-Setting up engien brakets. 
-    
+#include <Wire.h>
+#include <>
 
 
- */
-
-
-/*
-
-
+// Bluetooth https://www.arduino.cc/en/Main/ArduinoBoardBT?from=Main.ArduinoBoardBluetooth
 
 
 // defines motor 
 
-/*
 
-// right_motor1 
+
+// right_motor1_pin's 
 
 const int pwma  =    3 ;
 const int ain1   =    2 ;
 const int bin1  =    7 ;
 
-*/ 
 
-/*
+//encoderRight
 
-// left_motor2
+encoder_Right_A =
+encoder_Right_B =
+
+// left_motor2_pin's 
 
 const int pwmb  =   11 ;  
 const int bin2  =    8 ;
 const int ain2   =    4 ;
 
-*/
+//encoderLeft
 
-/* const int stby  =    6 ;  // What is this? 
+encoder_Left_A = 
+encoder_Left_B =
 
-// defining controle input
+
+//Parrameters for motor and wheels
+
+const int drive_distance = 100;   // cm
+const int motor_power = 0;      // 0-255 Speed is a variation of distans to obsticals. and the calculation is including ultrasonic sensors. 
+const int motor_offset = 5;       // Diff. when driving straight
+const int wheel_d = 60;           // Wheel diameter (mm)
+const float wheel_c = PI * wheel_d; // Wheel circumference (mm)
+const int counts_per_rev = 384;   // (4 pairs N-S) * (48:1 gearbox) * (2 falling/rising edges) = 384
+
+ const int stby  =    6 ;  // What is this? 
+
+// Controle input
 
 const int encoderRight = 0  ; // This is the magnetic encoder for
 const int encoderLeft  = 0  ; // This is the magnetic encoder for 
@@ -77,71 +82,87 @@ float lBackward = 0;
 float lForward = 0;
 float stby = 0;  
 
-*/
+ void ird()
+ // This is for starting the robot.
 
-/* void ird()
-/* This is for starting the robot.*/ 
 {
     start command
     dans  command 
 }
 
-*/
 
-/* void map() // The place where the size of the map is calculated and the perminent obsticals.
+
+ void map() // The place where the size of the map is calculated and the perminent obsticals.
 {
 
 // matrix nxn // getting the matrix is ()
 
 
 }
-*/
+
 
 
 
 
 //void compass_rotation
 
-// https://www.arduino.cc/en/Tutorial/Robot Compass
 
 
-// void surunding_discovery
 
-/*
+// https://www.arduino.cc/en/Tutorial/Robot Compass http://www.robot-electronics.co.uk/files/cmps12.pdf
+
+
+ void surunding_discovery
+
+
+
+
+
 
 void start()
 {
 
 
 
-surunding_discovery 
-
 
 }
 
-*/
 
-/* void navigation()
+
+ void navigation()
 {
 
 
+
 }
 
-*/
+ void position ()
+{
 
-/* void position ()
-{}
-*/
 
-/*
+
+
+}
+ 
+
+
+
+
+void Speed()
+
+{
+    Ultrasonicsensor input()  // taking the input and retract or substract a sum.  
+}
+
+
 void obsticals()
 {
 
 
 
+
 }
-*/
-/*
+
 void dans() // For the fun of it. 
 {
 
@@ -149,17 +170,12 @@ void dans() // For the fun of it.
 
 }
 
-*/
-
-/*
 
 void save()
 {
 
 }
 
-*/
-/*
 void setup()
 { Serial.begin(9600);   
 digitalread(encoderLeft,INPUT); // 
@@ -174,10 +190,10 @@ digitalwrit()
 
 
 }
-*/
 
 
-/*
+
+
 void loop
 
 {
@@ -209,5 +225,7 @@ void loop
 
 
 }
+// Statistics https://playground.arduino.cc/Main/Statistics/
+// Statistics 
 
-*/
+
